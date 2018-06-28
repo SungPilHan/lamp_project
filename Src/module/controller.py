@@ -14,7 +14,8 @@ class controller(object):
 			else:
 				lamp.turnOn()
 
-			self.interface.deawLamp(lamp)
-			
 		except:
-			pass	 
+			pass
+
+		self.interface.drawLamp(lamp)
+	 
