@@ -4,10 +4,11 @@ class Interface():
     def __init__(self):
         self.tk = Tk()
         self.tk.title("lamp_program")
-        self.tk.geometry("320x100")
+        self.tk.geometry("330x100")
         self.imgOff = PhotoImage(file='light_bulb_off.gif')
         self.imgOn = PhotoImage(file='light_bulb_on.gif')
         self.labels = []
+        self.choice=None
 
         for k in range(0,5):
             label = Label(image=self.imgOff)
@@ -15,15 +16,19 @@ class Interface():
             self.labels.append(label)
 
         for k in range (0,5):
-            self.bind(str(k+1), self.userInput)
+            self.tk.bind(str(k+1), self.userInput)
 
         self.tk.mainloop()
 
     def getChoice(self):
         return self.choice
 
+    def resetChoice(self):
+        self.choice = None
+
     def userInput(self,event):
-        self.choice = event.char()
+        self.choice = event.char
+        print(self.choice)
 
     def drawLamp(self, lamps):
         for label in self.labels:
