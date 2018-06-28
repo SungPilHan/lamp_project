@@ -47,3 +47,40 @@ class Interface():
                 self.labels.append(label)
 
         self.tk.update()
+
+class Lamp:
+    def __init__(self):
+        self.state = False
+
+    def getState(self):
+        return self.state
+
+    def turnOn(self):
+        self.state = True
+
+    def turnOff(self):
+        self.state = False
+
+class controller(object):
+	def __init__(self):
+		self.interface = Interface()
+	
+	def control(self, lamps):
+		choice = interface.getChoice()
+		lamp = lamps[int(choice) - 1]
+		
+		if lamp.getState():
+			lamp.turnOff()
+		else:
+			lamp.turnOn()
+
+		interface.drawLamp(lamp)
+
+if __name__=="__main__":
+    lamps = []
+    for i in range(0,5):
+        lamp = Lamp()
+        lamps.append(lamp)
+
+    
+    
