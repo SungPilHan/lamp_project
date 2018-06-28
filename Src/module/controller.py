@@ -1,14 +1,19 @@
 class controller(object):
-	def __init__(self):
-		self.interface = Interface()
-	
-	def control(self, lamps):
-		choice = interface.getChoice()
-		lamp = lamps[int(choice) - 1]
-		
-		if lamp.getState():
-			lamp.turnOff()
-		else:
-			lamp.turnOn()
+	def __init__(self, interface, lamps):
+		self.interface = interface
+		self.lamps = lamps
 
-		interface.drawLamp(lamp)
+	def control(self):
+		try:
+			choice = self.interface.getChoice()
+			self.interface.resetChoice()
+			lamp = self.lamps[int(choice) - 1]
+		
+			if lamp.getState():
+				lamp.turnOff()
+			else:
+				lamp.turnOn()
+		except:
+			pass
+
+		return self.lamps		 
