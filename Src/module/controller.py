@@ -1,9 +1,8 @@
 class controller(object):
-	def __init__(self, lamps):
-		self.lamps = lamps
+	def __init__(self):
 		self.interface = Interface()
 	
-	def control(self):
+	def control(self, lamps):
 		choice = interface.getChoice()
 		lamp = lamps[int(choice) - 1]
 		
