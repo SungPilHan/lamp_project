@@ -4,6 +4,7 @@ class controller(object):
 		self.lamps = lamps
 
 	def control(self):
+		choice = None
 		try:
 			choice = self.interface.getChoice()
 			self.interface.resetChoice()
@@ -17,5 +18,6 @@ class controller(object):
 		except:
 			pass
 
-		self.interface.drawLamp(self.lamps)
+		if choice:
+			self.interface.drawLamp(self.lamps)
 	 
