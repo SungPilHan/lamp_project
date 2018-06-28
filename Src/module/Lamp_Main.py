@@ -1,5 +1,5 @@
 from tkinter import *
-
+from time import *
 class Interface():
     def __init__(self):
         self.tk = Tk()
@@ -28,23 +28,24 @@ class Interface():
         self.choice = event.char
         print(self.choice)
 
-    def drawLamp(self, lamps):
-        for label in self.labels:
-            label.pack_forget()
-            del label
+    def drawLamp(self, lamps = None):
+        if lamps != None:         
+            for label in self.labels:
+                label.pack_forget()
+                del label
 
-        for lamp in lamps:
-            # turn on
-            if lamp.getState():
-                label = Label(image=self.imgOn)
-                label.pack(side=LEFT)
-                self.labels.append(label)
+            for lamp in lamps:
+                # turn on
+                if lamp.getState():
+                    label = Label(image=self.imgOn)
+                    label.pack(side=LEFT)
+                    self.labels.append(label)
 
-            # turn off
-            else:
-                label = Label(image=self.imgOff)
-                label.pack(side=LEFT)
-                self.labels.append(label)
+                # turn off
+                else:
+                    label = Label(image=self.imgOff)
+                    label.pack(side=LEFT)
+                    self.labels.append(label)
 
         self.tk.update()
 
@@ -62,25 +63,27 @@ class Lamp:
         self.state = False
 
 class controller(object):
-	def __init__(self, interface, lamps):
-		self.interface = interface
-		self.lamps = lamps
+    def __init__(self, interface, lamps):
+        self.interface = interface
+        self.lamps = lamps
 
-	def control(self):
-		try:
-			choice = self.interface.getChoice()
-			self.interface.resetChoice()
-			lamp = self.lamps[int(choice) - 1]
-		
-			if lamp.getState():
-				lamp.turnOff()
-			else:
-				lamp.turnOn()
+    def control(self):
+        choice = self.interface.getChoice()
+        if choice != None:
+            self.interface.resetChoice()
+            lamp = self.lamps[int(choice) - 1]
+        
+            if lamp.getState():
+                lamp.turnOff()
+            else:
+                lamp.turnOn()
+            self.interface.drawLamp(lamps)
 
-		except:
-			pass
+        else:
+            self.interface.drawLamp()
 
-		self.interface.drawLamp(self.lamps)
+
+
 
 if __name__=="__main__":
     lamps = []
@@ -91,4 +94,5 @@ if __name__=="__main__":
     inter = Interface()
     con = controller(inter, lamps)
     while True:
+        sleep(0.05)
         con.control()
