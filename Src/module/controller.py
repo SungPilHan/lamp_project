@@ -17,5 +17,5 @@ class controller(object):
 		except:
 			pass
 
-		self.interface.drawLamp(lamp)
+		self.interface.drawLamp(self.lamps)
 	 
