@@ -13,7 +13,8 @@ class controller(object):
 				lamp.turnOff()
 			else:
 				lamp.turnOn()
-		except:
-			pass
 
-		return self.lamps		 
+			self.interface.deawLamp(lamp)
+			
+		except:
+			pass	 
